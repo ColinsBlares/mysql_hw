@@ -33,5 +33,5 @@ INSERT INTO `hardware` (`title`, `price`, `amount`, `tag`)
 VALUE ('Ноутбук Lenovo 2BXKQ7E9XD', '54500', '1', 'new')
 ;
 -- 9. 
-delete from hardware where title = 'Очки PS VR 2';
+delete from hardware where title = 'Очки PS VR 2'
 ;
