@@ -8,7 +8,7 @@ JOIN directors ON movies.directors_id = directors.id
 WHERE directors.full_name = 'Фрэнсис Форд Коппола';
 --3.
 SELECT count(*) FROM movies
-WHERE year > year(curdate()) - 20;; 
+WHERE year > year(curdate()) - 20;
 --4.
 SELECT DISTINCT genres.title FROM movies
 JOIN genres ON movies.id_genres = genres.id
