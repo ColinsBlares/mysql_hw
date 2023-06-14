@@ -13,13 +13,13 @@ LIMIT 5;
 -- 3. 
 SELECT COUNT(shelves.title) FROM shelves
 JOIN books ON shelves.id = books.shelves_id
-WHERE shelves.title LIKE '%кабин%';
+WHERE shelves.title LIKE '%Полка в кабинете%'
 -- 4. 
 SELECT books.title, authors.name, books.year, shelves.title FROM shelves
 JOIN books ON shelves.id = books.shelves_id
 JOIN authors_books ON books.id = authors_books.books_id
 JOIN authors ON authors_books.authors_id = authors.id
-WHERE shelves.title LIKE '%спал%';
+WHERE shelves.title LIKE '%Полка в спальне%'
 -- 5. 
 SELECT books.title, books.year, authors.name FROM books
 JOIN authors_books ON books.id = authors_books.books_id
@@ -38,8 +38,12 @@ JOIN shelves ON books.shelves_id = shelves.id
 WHERE (shelves.title LIKE 'верхняя%') OR (shelves.title LIKE 'нижняя%');
 -- 8. 
 UPDATE books
-SET books.friends_id = 1
-WHERE id = 9;
+JOIN authors_books ON authors_books.books_id = books.id
+JOIN authors ON authors_books.authors_id = authors.id
+SET books.friends_id = (SELECT friends.id FROM friends WHERE friends.name = 'Иванов Иван')
+WHERE authors.name = 'Данте Алигьери' AND books.title = 'Божественная комедия'
+AND books.id > 0;
+
 -- 9. 
 INSERT INTO books (books.title, books.year, books.shelves_id)
 VALUES ('Краткие ответы на большие вопросы', '2020', 1);
