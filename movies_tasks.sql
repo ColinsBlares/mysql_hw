@@ -1,43 +1,31 @@
 --1.
 SELECT count(*) FROM movies
 JOIN companies ON movies.companies_id = companies.id
-WHERE companies.title = 'Universal Pictures'
-;
-
+WHERE companies.title = 'Universal Pictures';
 --2.
 SELECT count(*) FROM movies
 JOIN directors ON movies.directors_id = directors.id
-WHERE directors.full_name = 'Фрэнсис Форд Коппола'
-;
-
+WHERE directors.full_name = 'Фрэнсис Форд Коппола';
 --3.
 SELECT count(*) FROM movies
-WHERE year > year(curdate()) - 20;
-; 
-
+WHERE year > year(curdate()) - 20;; 
 --4.
 SELECT DISTINCT genres.title FROM movies
 JOIN genres ON movies.id_genres = genres.id
 JOIN directors ON movies.id_directors = directors.id
-WHERE directors.full_name = 'Стивен Спилберг'
-;
-
+WHERE directors.full_name = 'Стивен Спилберг';
 --5.
 SELECT movies.title, genres.title, directors.full_name FROM movies
 JOIN genres ON movies.genres_id = genres.id
 JOIN directors ON movies.id_directors = directors.id
 ORDER BY budget DESC
-LIMIT 5
-;
-
+LIMIT 5;
 --6.
 SELECT directors.full_name FROM movies
 JOIN directors ON movies.directors_id = directors.id
 GROUP BY directors.full_name
 ORDER BY COUNT(directors.full_name) DESC
-LIMIT 1
-;
-
+LIMIT 1;
 --7.
 SELECT movies.title, genres.title FROM movies
 JOIN genres ON movies.genres_id = genres.id
@@ -47,27 +35,19 @@ SELECT companies.title FROM movies
 JOIN companies ON movies.companies_id = companies.id
 GROUP BY companies.title
 ORDER BY SUM(movies.budget) DESC
-LIMIT 1
-)
-;
-
+LIMIT 1);
 --8.
 SELECT avg(movies.budget) FROM movies
 JOIN companies ON movies.companies_id = companies.id
 WHERE companies.title = 'Warner Bros.'
-GROUP BY companies.title
-;
-
+GROUP BY companies.titl;
 --9.
 SELECT genres.title, COUNT(movies.id), AVG(movies.budget) FROM movies
 JOIN genres ON movies.genres_id = genres.id
-GROUP BY genres.title
-;
-
+GROUP BY genres.title;
 --10.
 DELETE FROM movies
 WHERE id = (SELECT id FROM (SELECT movies.id FROM movies
 JOIN genres ON movies.genres_id
 WHERE movies.title = 'Дикие истории' AND genres.title = 'комедия'
-) as tmp)
-;
+) as tmp);
